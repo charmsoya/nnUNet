@@ -1,14 +1,18 @@
 # =================== settings =====================
 oringin_data_dir=/mnt/sda2/kits19/data
-current_data_dir=`pwd`
+current_data_dir=`pwd`"/Task00_KITS19"
+if [ ! -d $current_data_dir ];then
+	mkdir $current_data_dir
+  else
+	echo "Task00_KITS19 already exist"
+fi
+
 
 training_image_dir=$current_data_dir"/imagesTr"
 training_label_dir=$current_data_dir"/labelsTr"
 testing_image_dir=$current_data_dir"/imagesTs"
 
 test_idx=209
-
-
 # =============== file re-ordering =================
 time=$(date "+%Y-%m-%d %H:%M:%S")
 echo -e "\033[33m ${time}:Data from kits19 will be re-ordered and stored here (`pwd`) only by soft-link \033[0m"
@@ -40,12 +44,13 @@ do
 		imaging_file=`ls *imaging*`
 		if [ ${file:0-5:5} -gt $test_idx ];then
 			echo "link to testing case in "${file}
-			ln -s ${file}"/"${imaging_file} ${testing_image_dir}"/"${file##*/}"_imaging.nii.gz"
+			ln -s ${file}"/"${imaging_file} ${testing_image_dir}"/"${file##*/}"_0000.nii.gz"
 		else
 			echo "link to traing case in "${file}
 			segmentation_file=`ls segmentation*`
-			ln -s ${file}"/"${imaging_file} ${training_image_dir}"/"${file##*/}"_imaging.nii.gz"
-			ln -s ${file}"/"${segmentation_file} ${training_label_dir}"/"${file##*/}"_segmentation.nii.gz"
+			ln -s ${file}"/"${imaging_file} ${training_image_dir}"/"${file##*/}"_0000.nii.gz"
+			ln -s ${file}"/"${segmentation_file} ${training_label_dir}"/"${file##*/}".nii.gz"
 		fi
 	fi
 done
+

@@ -31,14 +31,14 @@ try:
     # automatically (they are subfolders of base).
     # Here I use environment variables to set the base folder. Environment variables allow me to use the same code on
     # different systems (and our compute cluster). You can replace this line with something like:
-    # base = "/path/to/my/folder"
-    base = os.environ['nnUNet_base']
+    base = "/home/lidouzhe/Documents/nnUNet/data/base"
+    #base = os.environ['nnUNet_base']
     raw_dataset_dir = join(base, "nnUNet_raw")
     splitted_4d_output_dir = join(base, "nnUNet_raw_splitted")
     cropped_output_dir = join(base, "nnUNet_raw_cropped")
     maybe_mkdir_p(splitted_4d_output_dir)
     maybe_mkdir_p(raw_dataset_dir)
-    maybe_mkdir_p(raw_dataset_dir)
+    maybe_mkdir_p(cropped_output_dir)
 except KeyError:
     cropped_output_dir = splitted_4d_output_dir = raw_dataset_dir = base = None
 
@@ -47,8 +47,9 @@ except KeyError:
 try:
     # Here I use environment variables to set the folder. Environment variables allow me to use the same code on
     # different systems (and our compute cluster). You can replace this line with something like:
-    # preprocessing_output_dir = "/path/to/my/folder_with_preprocessed_data"
-    preprocessing_output_dir = os.environ['nnUNet_preprocessed']
+    preprocessing_output_dir = "/home/lidouzhe/Documents/nnUNet/data/preprocessed"
+    #preprocessing_output_dir = os.environ['nnUNet_preprocessed']
+    maybe_mkdir_p(preprocessing_output_dir)
 except KeyError:
     preprocessing_output_dir = None
 
@@ -56,8 +57,9 @@ except KeyError:
 try:
     # Here I use environment variables to set the folder. Environment variables allow me to use the same code on
     # different systems (and our compute cluster). You can replace this line with something like:
-    # network_training_output_dir = "/path/to/my/folder_with_results"
-    network_training_output_dir = os.path.join(os.environ['RESULTS_FOLDER'], my_output_identifier)
+    #results_folder = os.environ['RESULTS_FOLDER']
+    results_folder = "/home/lidouzhe/Documents/nnUNet/data/"
+    network_training_output_dir = os.path.join(results_folder, my_output_identifier)
     maybe_mkdir_p(network_training_output_dir)
 except KeyError:
     network_training_output_dir = None
