@@ -55,7 +55,7 @@ if __name__ == "__main__":
     #test_dir = "/media/fabian/My Book/datasets/LiTS/test_data"
 
 
-    output_folder = "/home/lidouzhe/Documents/nnUNet/data/base/nnUNet_raw_splitted/Task00_KITS19"
+    output_folder = "/home/lidouzhe/Documents/nnUNet/data/base/nnUNet_raw/Task00_KITS19"
     img_dir = join(output_folder, "imagesTr")
     lab_dir = join(output_folder, "labelsTr")
     img_dir_te = join(output_folder, "imagesTs")
@@ -105,7 +105,7 @@ if __name__ == "__main__":
     json_dict = OrderedDict()
     json_dict['name'] = "KITS19"
     json_dict['description'] = "KITS19"
-    json_dict['tensorImageSize'] = "4D"
+    json_dict['tensorImageSize'] = "3D"
     json_dict['reference'] = "see challenge website"
     json_dict['licence'] = "see challenge website"
     json_dict['release'] = "0.0"
@@ -122,8 +122,8 @@ if __name__ == "__main__":
     json_dict['numTraining'] = len(train_ids)
     json_dict['numTest'] = len(test_ids)
     
-    pdb.set_trace()
-    json_dict['training'] = [{'image': "./imagesTr/%s"%i[0], "label": "./labelsTr/%s" %i[1]} for i in train_ids]
+    # pdb.set_trace()
+    json_dict['training'] = [{'image': "./imagesTr/%s" %i[0], "label": "./labelsTr/%s" %i[1]} for i in train_ids]
     json_dict['test'] = ["./imagesTs/%s" % i for i in test_ids]
 
     with open(os.path.join(output_folder, "dataset.json"), 'w') as f:

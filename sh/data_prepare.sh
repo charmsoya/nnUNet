@@ -44,12 +44,13 @@ do
 		imaging_file=`ls *imaging*`
 		if [ ${file:0-5:5} -gt $test_idx ];then
 			echo "link to testing case in "${file}
-			ln -s ${file}"/"${imaging_file} ${testing_image_dir}"/"${file##*/}"_0000.nii.gz"
+			ln -s ${file}"/"${imaging_file} ${testing_image_dir}"/"${file:0-5:5}".nii.gz"
 		else
 			echo "link to traing case in "${file}
 			segmentation_file=`ls segmentation*`
-			ln -s ${file}"/"${imaging_file} ${training_image_dir}"/"${file##*/}"_0000.nii.gz"
-			ln -s ${file}"/"${segmentation_file} ${training_label_dir}"/"${file##*/}".nii.gz"
+
+			ln -s ${file}"/"${imaging_file} ${training_image_dir}"/"${file:0-5:5}".nii.gz"
+			ln -s ${file}"/"${segmentation_file} ${training_label_dir}"/"${file:0-5:5}".nii.gz"
 		fi
 	fi
 done
